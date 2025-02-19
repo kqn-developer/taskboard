@@ -1,7 +1,7 @@
 import AddTask from "./components/AddTask.jsx";
 import SingleTask from "./components/SingleTask.jsx";
 import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar.jsx";
-import { taskTypes } from "./data/taskData.js";
+import { tasks, taskTypes } from "./data/taskData.js";
 
 export default function App() {
     return (
@@ -30,7 +30,11 @@ export default function App() {
                                 </div>
                                 {/* Task list */}
                                 <div className="-mx-3 mt-3 space-y-3">
-                                    <SingleTask />
+                                    {tasks
+                                        .filter((task) => task.type === type)
+                                        .map((task) => (
+                                            <SingleTask key={task.id} task={task} />
+                                        ))}
                                 </div>
                             </div>
                         ))}
