@@ -1,4 +1,4 @@
-import AddTaskButton from "./components/AddTaskButton.jsx";
+import AddTask from "./components/AddTask.jsx";
 import SingleTask from "./components/SingleTask.jsx";
 import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar.jsx";
 import { taskTypes } from "./data/taskData.js";
@@ -26,20 +26,19 @@ export default function App() {
                                 <div className="text-md mb-3 font-medium text-gray-800">{displayName}</div>
                                 {/* Add task */}
                                 <div className="-mx-3">
-                                    <AddTaskButton />
+                                    <AddTask />
                                 </div>
                                 {/* Task list */}
                                 <div className="-mx-3 mt-3 space-y-3">
                                     <SingleTask />
-
-                                    <button className="flex w-full cursor-pointer flex-col rounded-md bg-white p-3 hover:shadow-md hover:outline-1 hover:outline-gray-400">
+                                    {/* <button className="flex w-full cursor-pointer flex-col rounded-md bg-white p-3 hover:shadow-md hover:outline-1 hover:outline-gray-400">
                                         <p className="text-md font-medium text-gray-800">Công việc 2</p>
                                         <p className="mt-2 text-sm text-gray-800">Mô tả 2</p>
                                         <div className="mt-3 flex flex-wrap gap-2">
                                             <span className="rounded-sm bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">Default</span>
                                             <span className="rounded-sm bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 dark:bg-blue-900 dark:text-blue-300">Default</span>
                                         </div>
-                                    </button>
+                                    </button> */}
                                 </div>
                             </div>
                         ))}
