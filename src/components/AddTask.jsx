@@ -1,10 +1,10 @@
 import DueDateButton from "./DueDateButton.jsx";
 import LabelsButton from "./LabelsButton.jsx";
 import PriorityButton from "./PriorityButton.jsx";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Input } from "./ui/input.jsx";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select.jsx";
 import { Textarea } from "./ui/textarea.jsx";
-
 export default function AddTask() {
     return (
         <Dialog>
@@ -36,9 +36,19 @@ export default function AddTask() {
                         <LabelsButton />
                     </div>
                 </div>
-                <DialogFooter>
-                    <button className="cursor-pointer rounded-md bg-red-500 px-3 py-2 text-sm font-medium text-white shadow-xs hover:bg-red-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">Thêm</button>
-                </DialogFooter>
+                <div className="flex justify-between items-center">
+                    <Select>
+                        <SelectTrigger className="w-auto gap-1">
+                            <SelectValue placeholder="Việc cần làm" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="apple">Việc cần làm</SelectItem>
+                            <SelectItem value="banana">Đang làm</SelectItem>
+                            <SelectItem value="blueberry">Hoàn thành</SelectItem>
+                        </SelectContent>
+                    </Select>
+                    <button className="cursor-pointer rounded-md bg-red-400 px-3 py-2 text-sm font-medium text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">Lưu</button>
+                </div>
             </DialogContent>
         </Dialog>
     );
