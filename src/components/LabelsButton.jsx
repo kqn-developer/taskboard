@@ -1,8 +1,8 @@
-import { labels } from "@/data/taskData.js";
+import { taskLabels } from "@/data/taskData.js";
 import { Checkbox } from "./ui/checkbox.jsx";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover.jsx";
 
-export default function LabelsButton() {
+export default function taskLabelsButton() {
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -14,7 +14,7 @@ export default function LabelsButton() {
                 </button>
             </PopoverTrigger>
             <PopoverContent className={"w-50 flex flex-col gap-3 px-3 py-2.5"}>
-                {labels.map(({ id, name, slug }) => (
+                {taskLabels.map(({ id, name, slug }) => (
                     <div className="flex items-center space-x-2 justify-between" key={id}>
                         <label htmlFor={slug} className="grow text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-600 flex justify-between px-1 -mx-1 py-0.5 rounded-xs cursor-pointer hover:bg-gray-200">
                             <div className="flex gap-1">
