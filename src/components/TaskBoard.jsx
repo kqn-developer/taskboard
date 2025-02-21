@@ -10,12 +10,10 @@ export default function TaskBoard() {
                     <div className="text-md mb-3 font-medium text-gray-800">{taskName}</div>
                     <div className="-mx-3">
                         {/* features: adding a task */}
-                        <AddTaskDialog />
+                        <AddTaskDialog defaultStatus={taskStatus} />
                     </div>
                     {/* show task list */}
-                    <div className="-mx-3 mt-3">
-                        {/* <TaskList taskStatus={taskStatus} /> */}
-                    </div>
+                    <div className="-mx-3 mt-3">{/* <TaskList taskStatus={taskStatus} /> */}</div>
                 </div>
             ))}
         </div>

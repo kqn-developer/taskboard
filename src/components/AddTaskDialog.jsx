@@ -1,25 +1,59 @@
+import { tasks as initialTasks } from "@/data/taskData.js";
+import { cn } from "@/lib/utils.js";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import DueDatePicker from "./DueDatePicker.jsx";
-import TaskStatusSelect from "./TaskStatusSelect.jsx";
-import { Button } from "./ui/button.jsx";
+import LabelPicker from "./LabelPicker.jsx";
+import PriorityPicker from "./PriorityPicker.jsx";
+import StatusPicker from "./StatusPicker.jsx";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog.jsx";
 import { Input } from "./ui/input.jsx";
 import { Textarea } from "./ui/textarea.jsx";
-export default function AddTaskDialog() {
-    const { control, handleSubmit } = useForm({
+export default function AddTaskDialog({ defaultStatus }) {
+    const [open, setOpen] = useState(false);
+    const [tasks, setTasks] = useState(initialTasks);
+    const {
+        control,
+        handleSubmit,
+        watch,
+        reset,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             taskName: "",
             taskDesc: "",
             dueDate: new Date(),
+            priority: null,
+            labels: [],
+            status: defaultStatus,
         },
     });
+    const taskNameValue = watch("taskName");
+    const isDisabled = !taskNameValue?.trim() || Object.keys(errors).length > 0;
 
     function onSubmit(data) {
-        console.log(data);
+        const newTask = {
+            id: Date.now(), // Tạo ID duy nhất
+            name: data.taskName,
+            description: data.taskDesc,
+            dueDate: data.dueDate.toISOString(),
+            labels: data.labels,
+            priority: +data.priority,
+            status: data.status,
+        };
+
+        setTasks([...tasks, newTask]);
+        setOpen(false);
+        reset();
+    }
+
+    function handleDialogChange(isOpen) {
+        setOpen(isOpen);
+        if (!isOpen) reset();
     }
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={handleDialogChange}>
             <DialogTrigger asChild>
                 <button className="text-md flex w-full cursor-pointer items-center gap-2 rounded-md px-3 py-2 font-semibold text-gray-800 hover:text-red-400">
                     <svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -52,17 +86,19 @@ export default function AddTaskDialog() {
                             {/* Due date */}
                             <DueDatePicker control={control} />
                             {/* Priority */}
-                            <div>{/* <PriorityButton /> */}</div>
+                            <div>
+                                <PriorityPicker control={control} />
+                            </div>
                             {/* Labels */}
-                            {/* <LabelsButton /> */}
+                            <LabelPicker control={control} />
                         </div>
                     </div>
                     <div className="flex justify-between items-center mt-3">
                         {/* select status task */}
-                        <TaskStatusSelect />
-                        <Button type="submit" className="cursor-pointer rounded-md bg-red-400 px-3 py-2 text-sm font-medium text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-400">
+                        <StatusPicker defaultStatus={defaultStatus} control={control} />
+                        <button type="submit" disabled={isDisabled} className={cn("cursor-pointer rounded-md px-3 py-2 text-sm font-medium text-white shadow-xs", isDisabled ? "bg-gray-300 cursor-not-allowed" : "bg-red-400 hover:bg-red-500")}>
                             Lưu
-                        </Button>
+                        </button>
                     </div>
                 </form>
             </DialogContent>

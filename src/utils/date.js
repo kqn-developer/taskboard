@@ -18,6 +18,6 @@ export function displayDueDate(date) {
     if (currentYear === dateYear) {
         return `${format(localDate, "dd 'tháng' M", { locale: vi })} ${timeString}`;
     } else {
-        return `${format(localDate, "dd 'tháng' M 'năm' yyyy", { locale: vi })} ${timeString}`;
+        return `${format(localDate, "dd 'tháng' M, yyyy", { locale: vi })} ${timeString}`;
     }
 }
