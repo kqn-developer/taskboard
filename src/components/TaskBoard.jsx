@@ -1,6 +1,6 @@
 import { taskStatuses } from "@/data/taskData.js";
 import AddTaskDialog from "./AddTaskDialog.jsx";
-// import TaskList from "./TaskList.jsx";
+import TaskList from "./TaskList.jsx";
 
 export default function TaskBoard() {
     return (
@@ -13,7 +13,9 @@ export default function TaskBoard() {
                         <AddTaskDialog defaultStatus={taskStatus} />
                     </div>
                     {/* show task list */}
-                    <div className="-mx-3 mt-3">{/* <TaskList taskStatus={taskStatus} /> */}</div>
+                    <div className="-mx-3 mt-3">
+                        <TaskList taskStatus={taskStatus} />
+                    </div>
                 </div>
             ))}
         </div>

@@ -1,4 +1,4 @@
-import { format, isToday, isTomorrow, isYesterday } from "date-fns";
+import { format, isToday, isTomorrow, isYesterday, parseISO } from "date-fns";
 import { fromZonedTime, toZonedTime } from "date-fns-tz";
 import { vi } from "date-fns/locale";
 const timeZone = "Asia/Bangkok";
@@ -20,4 +20,12 @@ export function displayDueDate(date) {
     } else {
         return `${format(localDate, "dd 'tháng' M, yyyy", { locale: vi })} ${timeString}`;
     }
+}
+
+export function formattedDate(utcDateString) {
+    if (!utcDateString) return "";
+
+    const utcDate = parseISO(utcDateString);
+    const localDate = fromZonedTime(utcDate, timeZone);
+    return format(localDate, "yyyy-MM-dd'T'HH:mm", { locale: vi });
 }

@@ -8,7 +8,7 @@ export default function App() {
                 <MenuBar />
 
                 {/* <!-- Main --> */}
-                <div className="mt-5 flex h-screen items-start justify-start overflow-x-auto">
+                <div className="mt-5 flex h-screen items-start justify-start overflow-x-auto overflow-y-hidden">
                     <TaskBoard />
                 </div>
             </div>
